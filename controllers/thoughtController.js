@@ -30,13 +30,14 @@ module.exports = {
           ? res.status(404).json({
               message: 'Thought created, but found no user with that ID',
             })
-          : res.json('Created the thought 🎉')
+          : res.json('Created the thought')
       )
       .catch((err) => {
         console.log(err);
         res.status(500).json(err);
       });
   },
+  // update a thought
   updateThought(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -53,6 +54,7 @@ module.exports = {
         res.status(500).json(err);
       });
   },
+  // delete a thought
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
@@ -73,7 +75,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Add a thought reaction
+  // add a thought reaction
   addThoughtReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
@@ -87,7 +89,7 @@ module.exports = {
       )
       .catch((err) => res.status(500).json(err));
   },
-  // Remove thought reaction
+  // remove thought reaction
   removeThoughtReaction(req, res) {
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
